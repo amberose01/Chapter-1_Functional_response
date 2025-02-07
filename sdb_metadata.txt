@@ -1,0 +1,11 @@
+sheet= sdb 	functional response trials using Rhyzobius lophanthae
+	
+date		the month, day, and year that each trial was performed
+predator	the predator under investigation: scale destroyer beetle (SDB)
+cmbslifestage	the life stage of crapemyrtle bark scale (CMBS) used in the trial
+density		the number of CMBS in the petri dish before the trial began
+replicate	the number assigned to a given petri dish to distinguish replicates from one another
+eaten		the number of CMBS that had died after 24 hours of exposure to predator
+
+notes:
+AC= active crawlers

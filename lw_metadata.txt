@@ -1,0 +1,11 @@
+Sheet= lw 	functional response trials of Chrysoperla rufilabris	
+
+date		the month, day, and year that each trial was performed
+predator	the predator under investigation: lacewing
+cmbslifestage	the life stage of crapemyrtle bark scale (CMBS) used in the trial: either ovisacs, eggs, or crawlers
+density		the number of CMBS in the petri dish before the trial began
+replicate	the number assigned to a given petri dish to distinguish replicates from one another
+eaten		the number of CMBS that had died after 24 hours of exposure to predator
+
+notes:
+AC= active crawler
