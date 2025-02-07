@@ -7,7 +7,7 @@ library(readr)
 library('frair')
 
 sdb <- read_csv("sdb.csv")
-remove(sdb)
+
 
 #subset data frames to specific CMBS life stages
 
@@ -33,7 +33,7 @@ frair_test(eaten~density, sdbc)
 
 #create best fit line
 sdbc1<-frair_fit(eaten~density, data=sdbc, response='rogersII',
-                 start=list(a=0.0871856, h=0.4591673), fixed=list(T=24))
+                 start=list(a=0.088893, h=0.469820), fixed=list(T=24))
 lines(sdbc1, col='black', lwd=2)
 
 #statistical summary
@@ -56,7 +56,7 @@ frair_test(eaten~density, sdbo)
 
 #add best fit line
 sdbo1<-frair_fit(eaten~density, data=sdbo, response='rogersII',
-                 start=list(a=0.0224056, h=10.85669), fixed=list(T=24))
+                 start=list(a=0.0208457, h=10.6775057), fixed=list(T=24))
 lines(sdbo1, col='black', lwd=2)
 
 # summarize stats
