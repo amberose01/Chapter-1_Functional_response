@@ -16,30 +16,6 @@ sdbo<-sdb[sdb$cmbslifestage=='ovisacs',]
 sdbe<-sdb[sdb$cmbslifestage=='eggs',]
 
 
-## SDB crawlers ##
-
-#plot sdb crawler data
-
-with(sdbc,
-     plot(density, eaten, xlab='Initial prey density', ylab=NA, 
-          cex.lab=1.1, pch=21, xlim=c(0,55), ylim=c(0,40), cex.axis=0.8, cex=1.0, bg='hot pink', col='black',
-          text(x = 6.0, y = 37, "F) Crawlers"), mgp=c(1.7,0.5,0)))
-
-#add title
-title('Scale destroyer beetles and CMBS crawlers', cex.main=1.3)
-
-#determine type of response
-frair_test(eaten~density, sdbc)
-
-#create best fit line
-sdbc1<-frair_fit(eaten~density, data=sdbc, response='rogersII',
-                 start=list(a=0.088893, h=0.469820), fixed=list(T=24))
-lines(sdbc1, col='black', lwd=2)
-
-#statistical summary
-summary(sdbc1$fit)
-
-
 ###SDB Ovisacs###
 
 #plot data
@@ -83,6 +59,30 @@ lines(sdbe1, lwd=2)
 
 #summarize stats
 summary(sdbe1$fit)
+
+
+## SDB crawlers ##
+
+#plot sdb crawler data
+
+with(sdbc,
+     plot(density, eaten, xlab='Initial prey density', ylab=NA, 
+          cex.lab=1.1, pch=21, xlim=c(0,55), ylim=c(0,40), cex.axis=0.8, cex=1.0, bg='hot pink', col='black',
+          text(x = 6.0, y = 37, "F) Crawlers"), mgp=c(1.7,0.5,0)))
+
+#add title
+title('Scale destroyer beetles and CMBS crawlers', cex.main=1.3)
+
+#determine type of response
+frair_test(eaten~density, sdbc)
+
+#create best fit line
+sdbc1<-frair_fit(eaten~density, data=sdbc, response='rogersII',
+                 start=list(a=0.088893, h=0.469820), fixed=list(T=24))
+lines(sdbc1, col='black', lwd=2)
+
+#statistical summary
+summary(sdbc1$fit)
 
 
 ####LW Functional Response Curves#### 
@@ -159,6 +159,7 @@ title('Lacewing and CMBS Crawlers', cex.main=2)
 #determine response type
 frair_test(eaten~density, lwc)
 
+#perform linear regression for Type I
 lwc_lm<-lm(eaten~density, data=lwc)
 lm(eaten~density, lwc)
 summary(lwc_lm)
