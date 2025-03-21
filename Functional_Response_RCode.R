@@ -30,6 +30,16 @@ title('Scale destroyer beetles and CMBS ovisacs', cex.main=1.3)
 #determine type of response
 frair_test(eaten~density, sdbo)
 
+#Check model by comparing AIC between type II and III models
+
+b_flex <- frair_fit(eaten~density, data=sdbo, response='flexpnr',
+                    start=list(b=0.0224056, q=0,h=10.85669), fixed=list(T=24))
+b_fixed <- frair_fit(eaten~density, data=sdbo, response='flexpnr',
+                     start=list(b=0.0224056,h=10.85669), fixed=list(T=24, q=0))
+summary(b_flex$fit)
+AIC(b_flex$fit, b_fixed$fit) #type II preferred as b_fixed has lower AIC value
+
+
 #add best fit line
 sdbo1<-frair_fit(eaten~density, data=sdbo, response='rogersII',
                  start=list(a=0.0208457, h=10.6775057), fixed=list(T=24))
@@ -52,7 +62,24 @@ title('Scale destroyer beetles and CMBS eggs', cex.main=1.3)
 #determine type of response
 frair_test(eaten~density, sdbe)
 
-#create best fit line
+#Check model by comparing AIC values
+b_flex <- frair_fit(eaten~density, data=sdbe, response='flexpnr',
+                    start=list(b=0.1604320, q=0,h=0.1987681), fixed=list(T=24))
+b_fixed <- frair_fit(eaten~density, data=sdbe, response='flexpnr',
+                     start=list(b=0.1604320,h=0.1987681), fixed=list(T=24, q=0))
+summary(b_flex$fit)
+AIC(b_flex$fit, b_fixed$fit) #type III preferred as b_flex has lower AIC value
+
+  #Plotting a type III response
+with(sdbe,
+     plot(density, eaten, xlab="Initial prey density", ylab="Number of prey attacked", 
+          cex.lab=1.1, pch=21,cex=1.0, mgp = c(2, 0.5, 0), bg='hot pink',col='black'))
+
+sdbe2<-frair_fit(eaten~density, data=sdbe, response='hassIIInr',
+                 start=list(b=0.00686923, c=0.00960856, h=.24725677), fixed=list(T=24))
+lines(sdbe2, lwd=2) #TYPE II OBSERVED
+
+#Create Type II response
 sdbe1<-frair_fit(eaten~density, data=sdbe, response='rogersII',
                  start=list(a=0.1604320, h=.1987681), fixed=list(T=24))
 lines(sdbe1, lwd=2)
@@ -75,6 +102,16 @@ title('Scale destroyer beetles and CMBS crawlers', cex.main=1.3)
 
 #determine type of response
 frair_test(eaten~density, sdbc)
+
+#Check model by comparing AIC of type II and III models
+
+b_flex <- frair_fit(eaten~density, data=sdbc, response='flexpnr',
+                    start=list(b=0.0871856, q=0,h=0.4591673), fixed=list(T=24))
+b_fixed <- frair_fit(eaten~density, data=sdbc, response='flexpnr',
+                     start=list(b=0.0871856,h=0.4591673), fixed=list(T=24, q=0))
+summary(b_flex$fit)
+AIC(b_flex$fit, b_fixed$fit) #type II preferred as b_fixed has lower AIC value
+
 
 #create best fit line
 sdbc1<-frair_fit(eaten~density, data=sdbc, response='rogersII',
@@ -112,6 +149,14 @@ title('Lacewing Ovisacs')
 #determine response type
 frair_test(eaten~density, lwo)
 
+b_flex <- frair_fit(eaten~density, data=lwo, response='flexpnr',
+                    start=list(b=0.21255, q=0,h=75.24959), fixed=list(T=24))
+b_fixed <- frair_fit(eaten~density, data=lwo, response='flexpnr',
+                     start=list(b=0.21255,h=75.24959), fixed=list(T=24, q=0))
+
+summary(b_flex$fit) #error message to fit flex, couldn't invert Hessian
+AIC(b_flex$fit, b_fixed$fit) 
+
 #create best fit line
 lwo1<-frair_fit(eaten~density, data=lwo, response='rogersII',
                 start=list(a=0.21255, h=75.24959), fixed=list(T=24))
@@ -135,7 +180,24 @@ title('Lacewing and CMBS Eggs', cex.main=2)
 #determine type of response
 frair_test(eaten~density, lwe)
 
-#create best fit line
+b_flex <- frair_fit(eaten~density, data=lwe, response='flexpnr',
+                    start=list(b=0.0735951, q=0,h=.2923555), fixed=list(T=24))
+b_fixed <- frair_fit(eaten~density, data=lwe, response='flexpnr',
+                     start=list(b=0.0735951,h=.2923555), fixed=list(T=24, q=0))
+
+summary(b_flex$fit) #error message to fit flex, couldn't invert Hessian
+AIC(b_flex$fit, b_fixed$fit) #type III preferred
+  
+  #Plotting a Type III no replacement
+
+with(lwe,
+     plot(density, eaten, xlab="Initial prey density", ylab="Number of prey attacked", 
+          cex.lab=1.1, pch=21,cex=1.0, mgp = c(2, 0.5, 0), bg='hot pink',col='black'))
+lwe2<-frair_fit(eaten~density, data=lwe, response='hassIIInr',
+                start=list(b=0.00686923, c=0.00960856, h=.24725677), fixed=list(T=24))
+lines(lwe2, lwd=2) #TYPE II OBSERVED
+
+#Plotting a Type II
 lwe1<-frair_fit(eaten~density, data=lwe, response='rogersII',
                 start=list(a=0.0735951, h=.2923555), fixed=list(T=24))
 lines(lwe1, lwd=2)
@@ -158,6 +220,11 @@ title('Lacewing and CMBS Crawlers', cex.main=2)
 
 #determine response type
 frair_test(eaten~density, lwc)
+
+b_flex <- frair_fit(eaten~density, data=lwc, response='flexpnr',
+                    start=list(b=0.0735951, q=0,h=.2923555), fixed=list(T=24))
+b_fixed <- frair_fit(eaten~density, data=lwc, response='flexpnr',
+                     start=list(b=0.0735951,h=.2923555), fixed=list(T=24, q=0)) #Error in fitting either response = type I
 
 #perform linear regression for Type I
 lwc_lm<-lm(eaten~density, data=lwc)
